@@ -10,32 +10,37 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestProxy {
     @Test
     public void test(){
-        Proxy proxy = new Proxy();
-        proxy.method();
+        SunWuKong sunWuKong = new SunWuKong();
+        sunWuKong.beautifull();
     }
 }
 
-interface Source{void method();}
+interface OutLook{void beautifull();}
 
-class OldClass implements Source{
+/**
+ * 创建被代理人
+ */
+class GaoCuiLan implements OutLook{
     @Override
-    public void method() {
-        System.out.println("被代理类的方法正在执行。。");
+    public void beautifull() {
+        System.out.println("被代理人，真正的高翠兰。");
     }
 }
 
-class Proxy implements Source{
-    private Source source = new OldClass();
+/**
+ * 创建代理人
+ */
+class SunWuKong implements OutLook{
 
-    private void doSomething(){}
+    private GaoCuiLan gaoCuiLan = new GaoCuiLan();
 
+    // 代理人因为实现了跟被代理人一样的接口，拥有一样的方法
     @Override
-    public void method() {
-        System.out.println("代理类的方法正在执行。。");
-//        new Class1.Fun1();
-        source.method();
-//        new Class2.Fun2();
-        doSomething();
+    public void beautifull() {
+        System.out.println("代理人，孙悟空变的高翠兰");
+        // 代理人除了实现自己的方法，还可以调用被代理人的方法，即孙悟空不仅有自己的样子还有高翠兰的
+        gaoCuiLan.beautifull();
     }
 }
+
 
